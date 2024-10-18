@@ -1,0 +1,23 @@
+name: pygbag_build
+on: [workflow_dispatch]
+
+
+jobs:
+  build-pygbag:
+    name: Build for Emscripten with pygbag
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Checkout
+      run: |
+            sudo apt-get install -y ffmpeg pngquant
+            python3 -m pip install git+https://pygame-web/pygbag
+            python3 -m pygbag --PYBUILD=3.13 --git --template noctx.tmpl --build $GITHUB_WORKSPACE/main.py
+
+    - name : "Upload to GitHub pages"
+      uses: JamesIves/github-pages-deploy-action@4.1.7
+      with:
+        branch: gh-pages
+        folder: build/web
+
