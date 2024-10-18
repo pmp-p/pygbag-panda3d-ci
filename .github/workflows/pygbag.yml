@@ -12,7 +12,7 @@ jobs:
     - name: Checkout
       run: |
             sudo apt-get install -y ffmpeg pngquant
-            python3 -m pip install git+https://pygame-web/pygbag
+            python3 -m pip install git+https://github.com/pygame-web/pygbag
             python3 -m pygbag --PYBUILD=3.13 --git --template noctx.tmpl --build $GITHUB_WORKSPACE/main.py
             touch build/web/.nojekyll
 
